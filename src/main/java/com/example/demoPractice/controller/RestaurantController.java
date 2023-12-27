@@ -1,11 +1,12 @@
 package com.example.demoPractice.controller;
 
 import com.example.demoPractice.model.entity.Restaurant;
-import com.example.demoPractice.model.request.RestaurantRequest;
 import com.example.demoPractice.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -25,22 +26,9 @@ public class RestaurantController {
     }
 
     @GetMapping("/id")
-    public Restaurant getById(@RequestParam Long id) {
+    public Restaurant getById(@RequestParam(required = false, defaultValue = "1L") Long id) {
         return service.getById(id);
     }
 
-    @PostMapping()
-    public void save(@RequestBody Restaurant restaurant) {
-        service.save(restaurant);
-    }
 
-    @GetMapping("/by-capacity")
-    public ResponseEntity<?> getByCapacity( @RequestParam int capacity) {
-        return ResponseEntity.ok(service.getByCapacity(capacity));
-    }
-
-    @PutMapping
-    public ResponseEntity<?> update(@RequestBody RestaurantRequest request) {
-        return ResponseEntity.ok(service.update(request));
-    }
 }

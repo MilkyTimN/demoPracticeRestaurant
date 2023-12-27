@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @ToString
 @Entity
-@Table(name = "tb_restaurant")
-public class Restaurant {
+@Table(name = "tb_room")
+public class Room {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,11 +24,11 @@ public class Restaurant {
     LocalDateTime createdDate;
     @Column(name = "updated_date")
     LocalDateTime updatedDate;
-
     Status status;
+
+    @ManyToOne
+    Restaurant restaurant;
+    Integer capacity;
     String name;
-
-
-
-
+    Integer price;
 }
