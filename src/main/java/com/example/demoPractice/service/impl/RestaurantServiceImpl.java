@@ -1,11 +1,14 @@
 package com.example.demoPractice.service.impl;
 
 import com.example.demoPractice.model.entity.Restaurant;
+import com.example.demoPractice.model.enums.Status;
+import com.example.demoPractice.model.request.RestaurantCreateRequest;
 import com.example.demoPractice.repository.RestaurantRepository;
 import com.example.demoPractice.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -25,7 +28,16 @@ public class RestaurantServiceImpl implements RestaurantService {
         return repository.findById(id).orElseThrow();
     }
 
+    @Override
+    public Restaurant save(RestaurantCreateRequest request) {
 
+        Restaurant restaurant = Restaurant.builder()
+                .createdDate(LocalDateTime.now())
+                .updatedDate(LocalDateTime.now())
+                .status(Status.ACTIVE)
+                .name(request.name())
+                .build();
 
-
+        return repository.save(restaurant);
+    }
 }

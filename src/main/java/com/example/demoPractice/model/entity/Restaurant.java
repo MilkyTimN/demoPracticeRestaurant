@@ -26,6 +26,7 @@ public class Restaurant {
     LocalDateTime updatedDate;
 
     Status status;
+
     String name;
 
 
