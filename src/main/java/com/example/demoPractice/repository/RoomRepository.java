@@ -17,4 +17,17 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
             "inner join tb_address ta ON ta.restaurant_id = tres.id " +
             "where ta.city = :city", nativeQuery = true)
     List<MainPageResponseProjection> findRoomsByCity(String city);
+
+
+    @Query(value = "SELECT COUNT(*) FROM tb_room WHERE restaurant_id = :restaurantId", nativeQuery = true)
+    Integer countOfRoomsByRestaurant(Long restaurantId);
+
+
+    @Query(value = "SELECT AVG(r.price) FROM tb_room r WHERE r.restaurant_id = :restaurantId", nativeQuery = true)
+    Integer avgPriceOfRoomsByRestaurant(Long restaurantId);
+
+    @Query(value = "SELECT AVG(r.capacity) FROM tb_room r WHERE r.restaurant_id = :restaurantId", nativeQuery = true)
+    Integer avgCapacityOfRoomsByRestaurant(Long restaurantId);
+
+
 }

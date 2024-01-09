@@ -1,3 +1,1 @@
-RestaurantServiceImpl restaurantServiceImpl = new RestaurantServiceImpl();
-RestaurantServiceImplV2 restaurantServiceImplV2 = RestaurantServiceImplV2()
-RestaurantController restaurantController = new RestaurantController();
+ew RestaurantController();

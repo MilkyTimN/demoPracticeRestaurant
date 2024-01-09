@@ -5,6 +5,7 @@ import com.example.demoPractice.model.request.RestaurantCreateRequest;
 import com.example.demoPractice.service.RestaurantService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +34,11 @@ public class RestaurantController {
     @PostMapping
     public ResponseEntity<?> save(@RequestBody RestaurantCreateRequest request) {
         return ResponseEntity.ok(service.save(request));
+    }
+
+    @GetMapping("/getMainPage")
+    public ResponseEntity<?> getMainPage() {
+        return ResponseEntity.ok(service.getRestaurantsMainPage());
     }
 
 

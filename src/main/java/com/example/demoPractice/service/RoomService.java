@@ -13,4 +13,8 @@ public interface RoomService {
     Room getById(Long id);
 
     List<MainPageResponseProjection> getMainPage(String city);
+
+    Integer countOfRoomsByRestaurant(Long restaurantId);
+    Integer avgPriceOfRoomsByRestaurant(Long restaurantId);
+    Integer avgCapacityOfRoomsByRestaurant(Long restaurantId);
 }
