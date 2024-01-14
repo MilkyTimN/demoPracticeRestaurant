@@ -1,5 +1,7 @@
 package com.example.demoPractice.service.impl;
 
+import com.example.demoPractice.mapper.RestaurantMapper;
+import com.example.demoPractice.model.dto.RestaurantDto;
 import com.example.demoPractice.model.entity.Restaurant;
 import com.example.demoPractice.model.enums.Status;
 import com.example.demoPractice.model.request.RestaurantCreateRequest;
@@ -8,6 +10,7 @@ import com.example.demoPractice.repository.RestaurantRepository;
 import com.example.demoPractice.service.RestaurantService;
 import com.example.demoPractice.service.RoomService;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -23,17 +26,18 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 
     @Override
-    public List<Restaurant> getAll() {
-       return (List<Restaurant>) repository.findAll();
+    public List<RestaurantDto> getAll() {
+        List<Restaurant> restaurantList = (List<Restaurant>) repository.findAll();
+       return RestaurantMapper.INSTANCE.toDtos(restaurantList);
     }
 
     @Override
-    public Restaurant getById(Long id) {
-        return repository.findById(id).orElseThrow();
+    public RestaurantDto getById(Long id) {
+        return RestaurantMapper.INSTANCE.toDto(repository.findById(id).orElseThrow());
     }
 
     @Override
-    public Restaurant save(RestaurantCreateRequest request) {
+    public RestaurantDto save(RestaurantCreateRequest request) {
 
         Restaurant restaurant = Restaurant.builder()
                 .createdDate(LocalDateTime.now())
@@ -42,7 +46,9 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .name(request.name())
                 .build();
 
-        return repository.save(restaurant);
+        restaurant = repository.save(restaurant);
+
+        return RestaurantMapper.INSTANCE.toDto(restaurant);
     }
 
     @Override

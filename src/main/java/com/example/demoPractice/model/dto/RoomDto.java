@@ -1,5 +1,6 @@
-package com.example.demoPractice.model.entity;
+package com.example.demoPractice.model.dto;
 
+import com.example.demoPractice.model.entity.Restaurant;
 import com.example.demoPractice.model.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,22 +14,13 @@ import java.time.LocalDateTime;
 @Builder
 @RequiredArgsConstructor
 @ToString
-@Entity
-@Table(name = "tb_room")
-public class Room {
+public class RoomDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    @Column(name = "created_date")
     LocalDateTime createdDate;
-    @Column(name = "updated_date")
     LocalDateTime updatedDate;
     Status status;
-
-    @ManyToOne
-    Restaurant restaurant;
-
+    RestaurantDto restaurant;
     Integer capacity;
     String name;
     Integer price;

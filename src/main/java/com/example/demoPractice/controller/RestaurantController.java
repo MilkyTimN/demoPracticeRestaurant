@@ -1,5 +1,6 @@
 package com.example.demoPractice.controller;
 
+import com.example.demoPractice.model.dto.RestaurantDto;
 import com.example.demoPractice.model.entity.Restaurant;
 import com.example.demoPractice.model.request.RestaurantCreateRequest;
 import com.example.demoPractice.service.RestaurantService;
@@ -22,13 +23,13 @@ public class RestaurantController {
 
 
     @GetMapping
-    public List<Restaurant> getAll() {
+    public List<RestaurantDto> getAll() {
         return service.getAll();
     }
 
     @GetMapping("/id")
-    public Restaurant getById(@RequestParam(required = false, defaultValue = "1L") Long id) {
-        return service.getById(id);
+    public ResponseEntity<?> getById(@RequestParam(required = false, defaultValue = "1L") Long id) {
+        return ResponseEntity.ok(service.getById(id));
     }
 
     @PostMapping
