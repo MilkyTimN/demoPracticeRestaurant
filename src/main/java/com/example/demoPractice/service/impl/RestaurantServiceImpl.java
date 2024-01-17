@@ -3,10 +3,15 @@ package com.example.demoPractice.service.impl;
 import com.example.demoPractice.mapper.RestaurantMapper;
 import com.example.demoPractice.model.dto.RestaurantDto;
 import com.example.demoPractice.model.entity.Restaurant;
+import com.example.demoPractice.model.entity.Room;
 import com.example.demoPractice.model.enums.Status;
+import com.example.demoPractice.model.request.AddressCreateRequest;
+import com.example.demoPractice.model.request.ResFulCreateRequest;
 import com.example.demoPractice.model.request.RestaurantCreateRequest;
+import com.example.demoPractice.model.request.RoomCreateRequest;
 import com.example.demoPractice.model.response.RestaurantResponseMainPage;
 import com.example.demoPractice.repository.RestaurantRepository;
+import com.example.demoPractice.service.AddressService;
 import com.example.demoPractice.service.RestaurantService;
 import com.example.demoPractice.service.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +28,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     private final RestaurantRepository repository;
     private final RoomService roomService;
+    private final AddressService addressService;
 
 
     @Override
@@ -71,5 +77,23 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
 
         return restaurantResponseMainPages;
+    }
+
+    @Override
+    public Boolean saveFull(ResFulCreateRequest request) {
+
+        RestaurantDto restaurantDto = save(request.getRestaurantCreateRequest());
+
+        for (RoomCreateRequest item : request.getRoomCreateRequest()) {
+            item.setRestaurantDto(restaurantDto);
+            roomService.save(item);
+        }
+
+        AddressCreateRequest addressCreateRequest = request.getAddressCreateRequest();
+        addressCreateRequest.setRestaurant(restaurantDto);
+        addressService.save(addressCreateRequest);
+
+
+        return true;
     }
 }

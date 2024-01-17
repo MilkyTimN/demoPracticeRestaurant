@@ -1,11 +1,18 @@
 package com.example.demoPractice.model.request;
 
+import com.example.demoPractice.model.dto.RestaurantDto;
 import com.example.demoPractice.model.entity.Restaurant;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
-public record RoomCreateRequest(
-        Long restaurantId,
-        Integer capacity,
-        String name,
-        Integer price
-) {
+@Data
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class RoomCreateRequest {
+        RestaurantDto restaurantDto;
+        Integer capacity;
+        String name;
+        Integer price;
 }

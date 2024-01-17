@@ -2,6 +2,7 @@ package com.example.demoPractice.service;
 
 import com.example.demoPractice.model.dto.RestaurantDto;
 import com.example.demoPractice.model.entity.Restaurant;
+import com.example.demoPractice.model.request.ResFulCreateRequest;
 import com.example.demoPractice.model.request.RestaurantCreateRequest;
 import com.example.demoPractice.model.response.RestaurantResponseMainPage;
 
@@ -16,6 +17,8 @@ public interface RestaurantService {
     RestaurantDto save(RestaurantCreateRequest request);
 
     List<RestaurantResponseMainPage> getRestaurantsMainPage();
+
+    Boolean saveFull(ResFulCreateRequest request);
 
 
 }

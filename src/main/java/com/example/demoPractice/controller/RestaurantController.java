@@ -2,6 +2,7 @@ package com.example.demoPractice.controller;
 
 import com.example.demoPractice.model.dto.RestaurantDto;
 import com.example.demoPractice.model.entity.Restaurant;
+import com.example.demoPractice.model.request.ResFulCreateRequest;
 import com.example.demoPractice.model.request.RestaurantCreateRequest;
 import com.example.demoPractice.service.RestaurantService;
 
@@ -40,6 +41,11 @@ public class RestaurantController {
     @GetMapping("/getMainPage")
     public ResponseEntity<?> getMainPage() {
         return ResponseEntity.ok(service.getRestaurantsMainPage());
+    }
+
+    @PostMapping("/full/save")
+    public ResponseEntity<?> saveFully(@RequestBody ResFulCreateRequest request){
+        return ResponseEntity.ok(service.saveFull(request));
     }
 
 

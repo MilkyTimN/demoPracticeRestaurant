@@ -1,5 +1,8 @@
 package com.example.demoPractice.service.impl;
 
+import com.example.demoPractice.mapper.AddressMapper;
+import com.example.demoPractice.mapper.RestaurantMapper;
+import com.example.demoPractice.model.dto.RestaurantDto;
 import com.example.demoPractice.model.entity.Address;
 import com.example.demoPractice.model.enums.Status;
 import com.example.demoPractice.model.request.AddressCreateRequest;
@@ -15,7 +18,6 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class AddressServiceImpl implements AddressService {
 
-    private final RestaurantService restaurantService;
     private final AddressRepository repository;
 
     @Override
@@ -25,11 +27,11 @@ public class AddressServiceImpl implements AddressService {
                 .createdDate(LocalDateTime.now())
                 .updatedDate(LocalDateTime.now())
                 .status(Status.ACTIVE)
-                .city(request.city())
-                .lon(request.lon())
-                .lat(request.lat())
-                .street(request.street())
-                .restaurant(restaurantService.getById(request.restaurantId()))
+                .city(request.getCity())
+                .lon(request.getLon())
+                .lat(request.getLat())
+                .street(request.getStreet())
+                .restaurant(RestaurantMapper.INSTANCE.toEntity(request.getRestaurant()))
                 .build();
 
 

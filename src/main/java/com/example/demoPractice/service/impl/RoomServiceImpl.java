@@ -1,5 +1,6 @@
 package com.example.demoPractice.service.impl;
 
+import com.example.demoPractice.mapper.RestaurantMapper;
 import com.example.demoPractice.model.entity.Room;
 import com.example.demoPractice.model.enums.Status;
 import com.example.demoPractice.model.request.RoomCreateRequest;
@@ -23,18 +24,17 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public Room save(RoomCreateRequest request) {
 
-//        Room room = Room.builder()
-//                .createdDate(LocalDateTime.now())
-//                .updatedDate(LocalDateTime.now())
-//                .status(Status.ACTIVE)
-//                .price(request.price())
-//                .name(request.name())
-//                .capacity(request.capacity())
-//                .restaurant(restaurantService.getById(request.restaurantId()))
-//                .build();
-//
-//        return repository.save(room);
-        return null;
+        Room room = Room.builder()
+                .createdDate(LocalDateTime.now())
+                .updatedDate(LocalDateTime.now())
+                .status(Status.ACTIVE)
+                .price(request.getPrice())
+                .name(request.getName())
+                .capacity(request.getCapacity())
+                .restaurant(RestaurantMapper.INSTANCE.toEntity(request.getRestaurantDto()))
+                .build();
+
+        return repository.save(room);
     }
 
     @Override
