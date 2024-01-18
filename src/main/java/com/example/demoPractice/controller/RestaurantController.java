@@ -1,5 +1,6 @@
 package com.example.demoPractice.controller;
 
+import com.example.demoPractice.exception.NotFoundException;
 import com.example.demoPractice.model.dto.RestaurantDto;
 import com.example.demoPractice.model.entity.Restaurant;
 import com.example.demoPractice.model.request.ResFulCreateRequest;
@@ -30,7 +31,13 @@ public class RestaurantController {
 
     @GetMapping("/id")
     public ResponseEntity<?> getById(@RequestParam(required = false, defaultValue = "1L") Long id) {
-        return ResponseEntity.ok(service.getById(id));
+        try {
+            RestaurantDto restaurantDto = service.getById(id);
+            return ResponseEntity.ok(restaurantDto);
+        } catch (NotFoundException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.I_AM_A_TEAPOT);
+        }
+
     }
 
     @PostMapping

@@ -1,5 +1,7 @@
 package com.example.demoPractice.service.impl;
 
+import com.example.demoPractice.exception.EmptyListException;
+import com.example.demoPractice.exception.NotFoundException;
 import com.example.demoPractice.mapper.RestaurantMapper;
 import com.example.demoPractice.model.dto.RestaurantDto;
 import com.example.demoPractice.model.entity.Restaurant;
@@ -34,12 +36,17 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public List<RestaurantDto> getAll() {
         List<Restaurant> restaurantList = (List<Restaurant>) repository.findAll();
+        if (restaurantList.isEmpty()) {
+            throw new EmptyListException("Restaurant list is empty");
+        }
+
        return RestaurantMapper.INSTANCE.toDtos(restaurantList);
     }
 
     @Override
     public RestaurantDto getById(Long id) {
-        return RestaurantMapper.INSTANCE.toDto(repository.findById(id).orElseThrow());
+        return RestaurantMapper.INSTANCE.toDto(repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Restaurant with " + id + " not found")));
     }
 
     @Override
