@@ -29,15 +29,15 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public FeedbackDto save(FeedbackCreateRequest request) {
-        Feedback entity = Feedback.builder()
-                .createdDate(LocalDateTime.now())
-                .updatedDate(LocalDateTime.now())
-                .status(Status.ACTIVE)
-                .comment(request.getComment())
-                .restaurant(RestaurantMapper.INSTANCE.toEntity(restaurantService.getById(request.getRestaurantId())))
-                .user(UserMapper.INSTANCE.toEntity(userService.getById(request.getUserId())))
-                .build();
-        return FeedbackMapper.INSTANCE.toDto(repository.save(entity));
+//        Feedback entity = Feedback.builder()
+//                .createdDate(LocalDateTime.now())
+//                .updatedDate(LocalDateTime.now())
+//                .status(Status.ACTIVE)
+//                .comment(request.getComment())
+//                .restaurant(RestaurantMapper.INSTANCE.toEntity(restaurantService.getById(request.getRestaurantId())))
+//                .user(UserMapper.INSTANCE.toEntity(userService.getById(request.getUserId())))
+//                .build();
+        return FeedbackMapper.INSTANCE.toDto(repository.save(null));
     }
 
     @Override

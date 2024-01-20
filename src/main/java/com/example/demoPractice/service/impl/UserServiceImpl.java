@@ -8,6 +8,8 @@ import com.example.demoPractice.model.enums.Status;
 import com.example.demoPractice.model.request.UserCreateRequest;
 import com.example.demoPractice.repository.UserRepository;
 import com.example.demoPractice.service.UserService;
+import com.example.demoPractice.utils.Language;
+import com.example.demoPractice.utils.ResourceBundleLanguage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +37,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getById(Long id) {
+    public UserDto getById(Long id, int languageOrdinal) {
+        Language language = Language.getLanguage(languageOrdinal);
+
         return UserMapper.INSTANCE.toDto(repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Пользователь под id " + id + " не найден")));
+                .orElseThrow(()
+                        -> new NotFoundException(ResourceBundleLanguage.periodMessage(language, "entityNotFound"))));
     }
 }

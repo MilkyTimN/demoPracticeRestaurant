@@ -6,5 +6,5 @@ import com.example.demoPractice.model.request.UserCreateRequest;
 public interface UserService {
 
     UserDto save(UserCreateRequest request);
-    UserDto getById(Long id);
+    UserDto getById(Long id, int languageOrdinal);
 }

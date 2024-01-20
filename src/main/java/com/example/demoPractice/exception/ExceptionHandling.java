@@ -24,7 +24,7 @@ public class ExceptionHandling {
     }
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> exceptionHandle(NotFoundException e) {
-        return new ResponseEntity(new Response(e, e.getMessage()), HttpStatus.I_AM_A_TEAPOT);
+        return new ResponseEntity(new Response(null, e.getMessage()), HttpStatus.I_AM_A_TEAPOT);
     }
 
     @ExceptionHandler(EmptyListException.class)

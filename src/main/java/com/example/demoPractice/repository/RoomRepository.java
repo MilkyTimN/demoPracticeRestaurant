@@ -29,5 +29,4 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     @Query(value = "SELECT AVG(r.capacity) FROM tb_room r WHERE r.restaurant_id = :restaurantId", nativeQuery = true)
     Integer avgCapacityOfRoomsByRestaurant(Long restaurantId);
 
-
 }
